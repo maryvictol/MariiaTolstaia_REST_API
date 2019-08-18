@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="AllTests">
+    <test name="AllTests">
+        <classes>
+            <class name="TestsForCheckTextMethod"/>
+            <class name="TestsForCheckTextsMethod"/>
+        </classes>
+    </test>
+</suite>
