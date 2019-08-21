@@ -1,3 +1,6 @@
+import static org.assertj.core.api.Assertions.assertThat;
+import static service.enums.Options.IGNORE_DIGITS;
+
 import dto.SpellerDto;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
@@ -5,9 +8,6 @@ import service.RestSpellerAssertions;
 import service.RestSpellerSteps;
 import service.Uri;
 import service.enums.Parameters;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static service.enums.Options.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,6 +41,13 @@ public class TestsForCheckTextMethod {
         HashMap<String, Object> parameters = new HashMap<>();
 
         //Options=DEFAULT: Words with digits aren't returned as error word
+
+        //todo напишу тут, хотя касается впринципе подхода. У тебя есть степы, где и должны прикидваться урлы
+        // SINGLE_TEXT в тесте писать не стоит, вынеси на уровень степов. т.е. метод был бы таким
+        //getCheckText(testText) ну или просто checkText(testText)
+        //getCheckTexts(testText) ну или просто checkTexts(testText)
+        //getCheckTextWithParam(testText, params) ну или просто checkTexts(testText)
+        //
         SpellerDto[][] spellerDtos = new RestSpellerSteps()
                 .getSpellerDtoWithParams(Uri.SINGLE_TEXT, parameters, testText);
         new RestSpellerAssertions(spellerDtos[0])
