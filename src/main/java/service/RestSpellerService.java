@@ -32,10 +32,8 @@ public class RestSpellerService {
             specification.param("text", row);
         }
 
-        if (!parameters.isEmpty()) {
-            specification.params(parameters);
-        }
-        return specification.get(uri);
+        return specification.params(parameters)
+                .get(uri);
         //todo а можно вот так specification.get(uri, parameters)??
     }
 

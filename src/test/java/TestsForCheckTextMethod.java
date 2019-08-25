@@ -21,7 +21,7 @@ public class TestsForCheckTextMethod {
 
         //Check status code 400
         assertThat(new RestSpellerSteps()
-                .getStatusCode(Uri.SINGLE_TEXT, parameters, "text"))
+                .getCheckTextStatusCode(parameters, "text"))
                 .isEqualTo(HttpStatus.SC_BAD_REQUEST);
     }
 
@@ -30,7 +30,7 @@ public class TestsForCheckTextMethod {
             dataProvider = "checkMultipleResponse")
     void checkMultipleResults(String testText, String... expectedWords) throws IOException {
         SpellerDto[][] spellerDtos = new RestSpellerSteps()
-                .getSpellerDtoWithoutParams(Uri.SINGLE_TEXT, testText);
+                .checkText(testText);
         new RestSpellerAssertions(spellerDtos[0]).verifyWords(expectedWords);
     }
 
@@ -49,7 +49,7 @@ public class TestsForCheckTextMethod {
         //getCheckTextWithParam(testText, params) ну или просто checkTexts(testText)
         //
         SpellerDto[][] spellerDtos = new RestSpellerSteps()
-                .getSpellerDtoWithParams(Uri.SINGLE_TEXT, parameters, testText);
+                .checkText(parameters, testText);
         new RestSpellerAssertions(spellerDtos[0])
                 .verifyWord(0, expectedWord)
                 .verifyErrorCode(0, code)
@@ -58,7 +58,7 @@ public class TestsForCheckTextMethod {
         //Options=IGNORE_DIGITS: Words with digits aren't returned as error word
         parameters.put(Parameters.OPTIONS.getParameter(), IGNORE_DIGITS.getOption());
         spellerDtos = new RestSpellerSteps()
-                .getSpellerDtoWithParams(Uri.SINGLE_TEXT, parameters, testText);
+                .checkText(parameters, testText);
         new RestSpellerAssertions(spellerDtos[0])
                 .verifyEmptyResponse();
     }
